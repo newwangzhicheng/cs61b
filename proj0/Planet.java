@@ -24,8 +24,7 @@ public class Planet {
      */
     public String imgFileName;
 
-    public Planet(double xP, double yP, double xV,
-                  double yV, double m, String img){
+    public Planet(double xP, double yP, double xV, double yV, double m, String img) {
         xxPos = xP;
         yyPos = yP;
         xxVel = xV;
@@ -45,6 +44,7 @@ public class Planet {
 
     /**
      * calculate the distance between p and this planet
+     * 
      * @param p target planet
      * @return distance
      */
@@ -56,6 +56,7 @@ public class Planet {
 
     /**
      * calculate the force exerted by planet p
+     * 
      * @param p planet
      * @return force
      */
@@ -67,6 +68,7 @@ public class Planet {
 
     /**
      * calculate the force of x direction
+     * 
      * @param p
      * @return
      */
@@ -78,6 +80,7 @@ public class Planet {
 
     /**
      * calculate the force of Y direction
+     * 
      * @param p
      * @return
      */
@@ -89,6 +92,7 @@ public class Planet {
 
     /**
      * calculate net force exerted by x
+     * 
      * @param allPlanets
      * @return
      */
@@ -104,6 +108,7 @@ public class Planet {
 
     /**
      * calculate net force exerted by y
+     * 
      * @param allPlanets
      * @return
      */
@@ -119,6 +124,7 @@ public class Planet {
 
     /**
      * udpate the position of this planet in dt time
+     * 
      * @param dt
      * @param forceX net force of x
      * @param forceY net force of y
@@ -130,5 +136,12 @@ public class Planet {
         yyVel += dt * aY;
         xxPos += dt * xxVel;
         yyPos += dt * yyVel;
+    }
+
+    /**
+     * draw the position of this planet with StdDraw
+     */
+    public void draw() {
+        StdDraw.picture(xxPos, yyPos, "images/" + imgFileName);
     }
 }
