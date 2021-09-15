@@ -99,13 +99,12 @@ public class LinkedListDequeTest {
 		deque.addFirst("this");
 		deque.addLast(".");
 		deque.printDeque();
-		deque.removeFirst();
-		deque.removeLast();
-		System.out.println(deque.get(0));
-		System.out.println(deque.get(1));
-		System.out.println(deque.get(2));
-		System.out.println(deque.get(3));
-		System.out.println(deque.get(4));
+		System.out.println();
+		System.out.println(deque.getRecursive(0));
+		System.out.println(deque.getRecursive(1));
+		System.out.println(deque.getRecursive(2));
+		System.out.println(deque.getRecursive(3));
+		System.out.println(deque.getRecursive(4));
 	}
 
 	public static void main(String[] args) {

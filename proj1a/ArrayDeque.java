@@ -13,30 +13,34 @@ public class ArrayDeque<T> {
   }
 
   /** Resize the deque */
-  private resize(int capacity) {
-
+  private void resize(int capacity) {
+    T[] a = (T[]) new Object[capacity];
+    for (int i = 0; i < size; i++) {
+      a[i] = get(i);
+    }
+    item = a;
+    nextFirst = capacity - 1;
+    nextLast = size;
   }
 
   /** Add an item to the first place */
   public void addFirst(T x) {
-    int length = item.length;
-    if (size == length - 1) {
-      resize(size * 2);
+    if (size == item.length - 1) {
+      resize(item.length * 2);
     }
     size++;
-    nextFirst = (--nextFirst + length) % length;
     item[nextFirst] = x;
+    nextFirst = minusOne(nextFirst);
   }
 
   /** Add an item to the last place */
   public void addLast(T x) {
-    int length = item.length;
-    if (size == length - 1) {
-      resize(size * 2);
+    if (size == item.length - 1) {
+      resize(item.length * 2);
     }
     size++;
-    nextLast = (++nextLast + length) % length;
     item[nextLast] = x;
+    nextLast = plusOne(nextLast);
   }
 
   /** Judge if this is empty */
@@ -51,52 +55,60 @@ public class ArrayDeque<T> {
 
   /** Print the items of the list, separated by a space */
   public void printDeque() {
-    int length = item.length;
     for (int i = 0; i < size; i++) {
-      int index = (++nextFirst + i + length) % length;
+      int index = (nextFirst + 1 + i + item.length) % item.length;
       System.out.print(item[index] + " ");
     }
   }
 
   /** Remove the first item of the list, return null if it is not existd */
   public T removeFirst() {
-    int length = item.length;
     if (isEmpty()) {
       return null;
     }
     size--;
-    nextFirst = (++nextFirst + length) % length;
+    nextFirst = plusOne(nextFirst);
     T x = item[nextFirst];
     item[nextFirst] = null;
-    if (size / item.length < 0.25) {
-      resize(size / 2);
+    if ((float) size / item.length < 0.25) {
+      resize(item.length / 2);
     }
     return x;
   }
 
   /** Remove the last item of the list, return null if it is not existd */
   public T removeLast() {
-    int length = item.length;
     if (isEmpty()) {
       return null;
     }
     size--;
-    nextLast = (--nextLast + length) % length;
+    nextLast = minusOne(nextLast);
     T x = item[nextLast];
     item[nextLast] = null;
-    if (size / item.length < 0.25) {
-      resize(size / 2);
+    if ((float) size / item.length < 0.25) {
+      resize(item.length / 2);
     }
     return x;
   }
 
   /** Return the ith item of the list, return null if it is not existed */
   public T get(int index) {
-    boolean indexInListLinear = (nextLast > nextFirst) && (index > nextFirst) && (index < nextLast);
-    boolean indexOutListCircle = (nextLast < nextFirst) && (index <= nextFirst) && (index  nextLast);
-    if (index >= nextLast && index) {
+    if (index < 0 || index >= size) {
       return null;
     }
+    int offset = nextFirst + 1;
+    int i = (offset + index + item.length) % item.length;
+    return item[i];
+
   }
 
+  /** Minus one for nextFirst and nextLast */
+  private int minusOne(int x) {
+    return (x - 1 + item.length) % item.length;
+  }
+
+  /** Plus one for nextFirst and nextLast */
+  private int plusOne(int x) {
+    return (x + 1 + item.length) % item.length;
+  }
 }
