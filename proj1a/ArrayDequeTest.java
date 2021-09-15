@@ -22,8 +22,8 @@ public class ArrayDequeTest {
         for (int i = 0; i < deque.size(); i++) {
             if (expected[i] != deque.get(i)) {
                 System.out.println(
-                        "Test Failed in position " + i + ", expected " + expected[i] + 
-                        " but got " + deque.get(i));
+                        "Test Failed in position " + i + ", expected " 
+                        + expected[i] + " but got " + deque.get(i));
             }
 
         }
@@ -53,8 +53,8 @@ public class ArrayDequeTest {
         for (i = 0; i < expected.length; i++) {
             if (deque.get(i) != expected[i]) {
                 System.out.println(
-                        "Test Failed in position " + i + ", expected " + expected[i] + 
-                        " but got " + deque.get(i));
+                        "Test Failed in position " + i + ", expected " 
+                        + expected[i] + " but got " + deque.get(i));
                 break;
             }
         }
