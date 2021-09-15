@@ -1,9 +1,9 @@
 public class LinkedListDeque<T> {
     /** Double linked node */
     private class Node {
-        public T item;
-        public Node prev;
-        public Node next;
+        private T item;
+        private Node prev;
+        private Node next;
 
         public Node() {
             item = null;
