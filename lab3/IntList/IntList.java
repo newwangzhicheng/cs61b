@@ -41,13 +41,15 @@ public class IntList {
         if (L == null) {
             return L;
         }
+        IntList q = L;
         IntList p = new IntList(L.first, null);
-        L = L.rest;
-        while (L != null) {
-            p = new IntList(L.first, p);
-            L = L.rest;
+        q = q.rest;
+        while (q != null) {
+            p = new IntList(q.first, p);
+            q = q.rest;
         }
-        L = p;
+        L.first = p.first;
+        L.rest = p.rest;
         return L;
     }
 
