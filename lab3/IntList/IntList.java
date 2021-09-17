@@ -47,6 +47,7 @@ public class IntList {
             p = new IntList(L.first, p);
             L = L.rest;
         }
+        L = p;
         return p;
     }
 
