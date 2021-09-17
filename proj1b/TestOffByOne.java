@@ -12,6 +12,7 @@ public class TestOffByOne {
     /** Test equalChars */
     @Test
     public void testEqualChars() {
+        boolean expTrue0 = offByOne.equalChars('a', 'B');
         boolean expTrue1 = offByOne.equalChars('a', 'b');
         boolean expTrue2 = offByOne.equalChars('b', 'a');
         boolean expTrue3 = offByOne.equalChars('&', '%');
@@ -19,6 +20,7 @@ public class TestOffByOne {
         boolean expFalse2 = offByOne.equalChars('-', 't');
         boolean expFalse3 = offByOne.equalChars('o', '6');
 
+        assertTrue(expTrue0);
         assertTrue(expTrue1);
         assertTrue(expTrue2);
         assertTrue(expTrue3);
