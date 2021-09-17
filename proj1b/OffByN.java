@@ -7,6 +7,6 @@ public class OffByN implements CharacterComparator {
 
     /** Judge the offset of two characters */
     public boolean equalChars(char x, char y) {
-        return Math.abs(x - y) == N;
+        return x - y == N || y - x == N;
     }
 }

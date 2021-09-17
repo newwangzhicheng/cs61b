@@ -20,7 +20,7 @@ public class TestOffByOne {
         boolean expFalse2 = offByOne.equalChars('-', 't');
         boolean expFalse3 = offByOne.equalChars('o', '6');
 
-        assertTrue(expTrue0);
+        assertFalse(expTrue0);
         assertTrue(expTrue1);
         assertTrue(expTrue2);
         assertTrue(expTrue3);
