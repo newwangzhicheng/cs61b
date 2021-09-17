@@ -48,7 +48,7 @@ public class IntList {
             L = L.rest;
         }
         L = p;
-        return p;
+        return L;
     }
 
     /**

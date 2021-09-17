@@ -77,10 +77,11 @@ public class IntListTest {
         IntList expC = IntList.of(1);
         assertEquals(actC, expC);
 
-        IntList A = IntList.of(1, 2, 3, 4, 5, 6);
+        IntList A = IntList.of(1, 2);
         IntList actA = IntList.reverse(A);
-        IntList expA = IntList.of(6, 5, 4, 3, 2, 1);
+        IntList expA = IntList.of(2, 1);
         assertEquals(actA, expA);
+        assertNotEquals(actA, A);
     }
 
     /**
