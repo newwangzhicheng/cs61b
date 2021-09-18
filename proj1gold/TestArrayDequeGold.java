@@ -22,18 +22,12 @@ public class TestArrayDequeGold {
             } else if (numberBetweenZeroAndOne >= 0.5 && numberBetweenZeroAndOne < 0.75) {
                 Integer actual = sad.removeFirst();
                 Integer expected = solution.removeFirst();
-                if (actual != null && expected != null) {
-                    assertEquals("removeFirst(), student was " + actual + "， correct was " + expected, expected,
-                            actual);
-                }
+                assertEquals("removeFirst(), student was " + actual + ", correct was " + expected, expected, actual);
                 System.out.println("removeFirst()");
             } else if (numberBetweenZeroAndOne >= 0.75 && numberBetweenZeroAndOne < 1) {
                 Integer actual = sad.removeLast();
                 Integer expected = solution.removeLast();
-                if (actual != null && expected != null) {
-                    assertEquals("removeFirst(), student was " + actual + "， correct was " + expected, expected,
-                            actual);
-                }
+                assertEquals("removeFirst(), student was " + actual + ", correct was " + expected, expected, actual);
                 System.out.println("removeLast()");
             }
 
