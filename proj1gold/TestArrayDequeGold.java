@@ -7,7 +7,9 @@ public class TestArrayDequeGold {
     public void testArrayDeque() {
         StudentArrayDeque<Integer> sad = new StudentArrayDeque<>();
         ArrayDequeSolution<Integer> solution = new ArrayDequeSolution<>();
-        for (int i = 0; i < 10; i += 1) {
+
+        while (true) {
+            int i = StdRandom.uniform(99999);
             double numberBetweenZeroAndOne = StdRandom.uniform();
             if (numberBetweenZeroAndOne >= 0 && numberBetweenZeroAndOne < 0.25) {
                 sad.addLast(i);
@@ -17,15 +19,21 @@ public class TestArrayDequeGold {
                 sad.addFirst(i);
                 solution.addFirst(i);
                 System.out.println("addFirst(" + i + ")");
-            } else if (numberBetweenZeroAndOne >= 0.5 && numberBetweenZeroAndOne < 0.75 && sad.size() > 0) {
+            } else if (numberBetweenZeroAndOne >= 0.5 && numberBetweenZeroAndOne < 0.75) {
                 Integer actual = sad.removeFirst();
                 Integer expected = solution.removeFirst();
-                assertEquals("removeFirst(), student was " + actual + "， correct was " + expected, expected, actual);
+                if (actual != null && expected != null) {
+                    assertEquals("removeFirst(), student was " + actual + "， correct was " + expected, expected,
+                            actual);
+                }
                 System.out.println("removeFirst()");
-            } else if (numberBetweenZeroAndOne >= 0.75 && numberBetweenZeroAndOne < 1 && sad.size() > 0) {
+            } else if (numberBetweenZeroAndOne >= 0.75 && numberBetweenZeroAndOne < 1) {
                 Integer actual = sad.removeLast();
                 Integer expected = solution.removeLast();
-                assertEquals("removeFirst(), student was " + actual + "， correct was " + expected, expected, actual);
+                if (actual != null && expected != null) {
+                    assertEquals("removeFirst(), student was " + actual + "， correct was " + expected, expected,
+                            actual);
+                }
                 System.out.println("removeLast()");
             }
 
