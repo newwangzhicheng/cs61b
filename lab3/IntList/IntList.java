@@ -38,18 +38,28 @@ public class IntList {
      * given null as an input, returns null.
      */
     public static IntList reverse(IntList L) {
-        if (L == null) {
-            return L;
+        // if (L == null) {
+        //     return L;
+        // }
+        // IntList q = L;
+        // IntList p = new IntList(L.first, null);
+        // q = q.rest;
+        // while (q != null) {
+        //     p = new IntList(q.first, p);
+        //     q = q.rest;
+        // }
+        // L.first = p.first;
+        // L.rest = p.rest;
+        // return L;
+        IntList p = L;
+        IntList ptr = L;
+        L = null;
+        while(p != null) {
+            p = p.rest;
+            ptr.rest = L;
+            L = ptr;
+            ptr = p;
         }
-        IntList q = L;
-        IntList p = new IntList(L.first, null);
-        q = q.rest;
-        while (q != null) {
-            p = new IntList(q.first, p);
-            q = q.rest;
-        }
-        L.first = p.first;
-        L.rest = p.rest;
         return L;
     }
 
