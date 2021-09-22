@@ -5,7 +5,7 @@ import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
 
 /**
- *  Draws a world that is mostly empty except for a small region.
+ * Draws a world that is mostly empty except for a small region.
  */
 public class BoringWorldDemo {
     private static final int WIDTH = 60;
@@ -25,15 +25,14 @@ public class BoringWorldDemo {
         }
 
         // fills in a block 14 tiles wide by 4 tiles tall
-        for (int x = 20; x < 35; x += 1) {
+        for (int x = 15; x < 35; x += 1) {
             for (int y = 5; y < 10; y += 1) {
-                world[x][y] = Tileset.WALL;
+                world[x][y] = Tileset.MOUNTAIN;
             }
         }
 
         // draws the world to the screen
         ter.renderFrame(world);
     }
-
 
 }
