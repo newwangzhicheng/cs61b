@@ -5,7 +5,7 @@ import java.util.HashMap;
 import synthesizer.GuitarString;
 
 public class GuitarHero {
-    private static final String keyboard = "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
+    private static final String KEYBOARD = "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
 
     /** convert contents of keybord string to char list */
     private static List<Character> convertKeyboardToList(String keyboard) {
@@ -44,20 +44,20 @@ public class GuitarHero {
     }
 
     public static void main(String[] args) {
-        List<Character> keyboardList = convertKeyboardToList(keyboard);
-        Map<Character, GuitarString> GuitarStringMap = createGuitarStringMap(keyboardList);
+        List<Character> keyboardList = convertKeyboardToList(KEYBOARD);
+        Map<Character, GuitarString> guitarStringMap = createGuitarStringMap(keyboardList);
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
                 char key = StdDraw.nextKeyTyped();
-                if (GuitarStringMap.containsKey(key)) {
-                    GuitarStringMap.get(key).pluck();
+                if (guitarStringMap.containsKey(key)) {
+                    guitarStringMap.get(key).pluck();
                 }
             }
-            double sample = sumAllSample(GuitarStringMap);
+            double sample = sumAllSample(guitarStringMap);
 
             StdAudio.play(sample);
 
-            ticAll(GuitarStringMap);
+            ticAll(guitarStringMap);
         }
     }
 }
