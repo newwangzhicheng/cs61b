@@ -1,10 +1,23 @@
 package byog.Core.Rectangle;
 
+import byog.Core.Point;
 import byog.TileEngine.TETile;
 
 public abstract class AbstractRectangle implements Rectangle {
     public int width;
     public int height;
+
+    /** Get the width of the rectangle */
+    @Override
+    public int width() {
+        return width;
+    }
+
+    /** Get the height of the rectangle */
+    @Override
+    public int height() {
+        return height;
+    }
 
     /** Get the short edge length of the rectangle */
     @Override
