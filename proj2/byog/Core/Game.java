@@ -34,19 +34,13 @@ public class Game {
      * @return the 2D TETile[][] representing the state of the world
      */
     public TETile[][] playWithInputString(String input) {
-        // TODO: Fill out this method to run the game using the input passed in,
-        // and return a 2D tile representation of the world that would have been
-        // drawn if the same inputs had been given to playWithKeyboard().
-
         TETile[][] finalWorldFrame = new TETile[WIDTH][HEIGHT];
-        Renderer renderer = new Renderer(WIDTH, HEIGHT);
         long seed = seed(input);
         Random random = new Random(seed);
 
-        /** Fill the world with nothing */
-        renderer.fill(finalWorldFrame, Tileset.NOTHING);
-        /** generate the world with the given seed */
-        renderer.randomRender(finalWorldFrame, Tileset.FLOOR, Tileset.WALL, random);
+        WorldGenerator wg = new WorldGenerator(WIDTH, HEIGHT, finalWorldFrame, Tileset.FLOOR, Tileset.WALL, random);
+        wg.generatRoom(500, true);
+        wg.connectRoom();
 
         ter.initialize(WIDTH, HEIGHT);
         ter.renderFrame(finalWorldFrame);
