@@ -38,8 +38,9 @@ public class Game {
         long seed = seed(input);
         Random random = new Random(seed);
 
-        WorldGenerator wg = new WorldGenerator(WIDTH, HEIGHT, finalWorldFrame, Tileset.FLOOR, Tileset.WALL, random);
-        wg.generatRoom(500, true);
+        WorldGenerator wg = new WorldGenerator(WIDTH, HEIGHT, finalWorldFrame, Tileset.CUSTOM_FLOOR,
+                Tileset.CUSTOM_WALL, random);
+        wg.generatRoom(300, false);
         wg.connectRoom();
 
         ter.initialize(WIDTH, HEIGHT);
