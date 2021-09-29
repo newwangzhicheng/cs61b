@@ -39,9 +39,13 @@ public class Room implements Comparable<Room> {
      * check if two projections are crossing
      */
     public boolean overlap(Room r, boolean canAdjacent) {
-        int gap = canAdjacent == true ? 0 : -1;
-        boolean crossingX = Math.min(r.right(), this.right()) - Math.max(r.left(), this.left()) >= gap;
-        boolean crossingY = Math.min(r.top(), this.top()) - Math.max(r.bottom(), this.bottom()) >= gap;
+        int gap = canAdjacent ? 0 : -1;
+        int minRight = Math.min(r.right(), this.right());
+        int maxLeft = Math.max(r.left(), this.left());
+        int minTop = Math.min(r.top(), this.top());
+        int maxBottom = Math.max(r.bottom(), this.bottom());
+        boolean crossingX = minRight - maxLeft >= gap;
+        boolean crossingY = minTop - maxBottom >= gap;
         return crossingX && crossingY;
     }
 

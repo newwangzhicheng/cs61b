@@ -37,6 +37,15 @@ public class WorldGenerator {
         }
     }
 
+    /** init the world, fill with nothing */
+    public static void initialize(TETile[][] wd, int width, int height) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                wd[i][j] = Tileset.NOTHING;
+            }
+        }
+    }
+
     /** Generate room try count times */
     public void generatRoom(int count, boolean canRoomBePlaced) {
         int w, h, x, y;

@@ -1,9 +1,12 @@
 package byog.Core;
 
+// import java.awt.Color;
+// import java.awt.Font;
 import java.util.Random;
 import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
+// import edu.princeton.cs.introcs.StdDraw;
 
 public class Game {
     TERenderer ter = new TERenderer();
@@ -16,6 +19,7 @@ public class Game {
      * menu.
      */
     public void playWithKeyboard() {
+        // drawStartGUI();
     }
 
     /**
@@ -30,7 +34,8 @@ public class Game {
      * "l", we'd expect to get the exact same world back again, since this
      * corresponds to loading the saved game.
      * 
-     * @param input the input string to feed to your program
+     * @param input
+     *            the input string to feed to your program
      * @return the 2D TETile[][] representing the state of the world
      */
     public TETile[][] playWithInputString(String input) {
@@ -43,11 +48,12 @@ public class Game {
         wg.generatRoom(300, false);
         wg.connectRoom();
 
-        ter.initialize(WIDTH, HEIGHT);
-        ter.renderFrame(finalWorldFrame);
+        // ter.initialize(WIDTH, HEIGHT);
+        // ter.renderFrame(finalWorldFrame);
         return finalWorldFrame;
     }
 
+    /** Get seed from input */
     private long seed(String input) {
         String seedStr = "";
         for (int i = 1; i < input.length(); i++) {
@@ -60,4 +66,31 @@ public class Game {
         }
         return Long.parseLong(seedStr);
     }
+
+    // private void drawStartGUI() {
+    // initializeCanvas();
+
+    // Font font = new Font("Monaco", Font.PLAIN, 60);
+    // StdDraw.setFont(font);
+    // StdDraw.text(WIDTH / 2, HEIGHT * 3 / 4, "CS61B: The Game");
+
+    // font = new Font("Monaco", Font.PLAIN, 20);
+    // StdDraw.setFont(font);
+    // StdDraw.text(WIDTH / 2, HEIGHT / 4 + 2, "New Game (N)");
+    // StdDraw.text(WIDTH / 2, HEIGHT / 4, "Load Game (L)");
+    // StdDraw.text(WIDTH / 2, HEIGHT / 4 - 2, "Quit (Q)");
+
+    // StdDraw.show();
+    // }
+
+    // /** draw gui */
+    // private void initializeCanvas() {
+    // StdDraw.setCanvasSize(WIDTH * 16, HEIGHT * 16);
+    // StdDraw.setXscale(0, WIDTH);
+    // StdDraw.setYscale(0, HEIGHT);
+    // StdDraw.clear(Color.BLACK);
+    // StdDraw.enableDoubleBuffering();
+    // StdDraw.setPenColor(Color.WHITE);
+
+    // }
 }

@@ -33,15 +33,21 @@ public class TETile {
     /**
      * Full constructor for TETile objects.
      * 
-     * @param character       The character displayed on the screen.
-     * @param textColor       The color of the character itself.
-     * @param backgroundColor The color drawn behind the character.
-     * @param description     The description of the tile, shown in the GUI on
-     *                        hovering over the tile.
-     * @param filepath        Full path to image to be used for this tile. Must be
-     *                        correct size (16x16)
+     * @param character
+     *            The character displayed on the screen.
+     * @param textColor
+     *            The color of the character itself.
+     * @param backgroundColor
+     *            The color drawn behind the character.
+     * @param description
+     *            The description of the tile, shown in the GUI on hovering over the
+     *            tile.
+     * @param filepath
+     *            Full path to image to be used for this tile. Must be correct size
+     *            (16x16)
      */
-    public TETile(char character, Color textColor, Color backgroundColor, String description, String filepath) {
+    public TETile(char character, Color textColor, Color backgroundColor, String description,
+            String filepath) {
         this.character = character;
         this.textColor = textColor;
         this.backgroundColor = backgroundColor;
@@ -54,11 +60,15 @@ public class TETile {
      * drawing, we will not even try to draw an image, and will instead use the
      * provided character and colors.
      * 
-     * @param character       The character displayed on the screen.
-     * @param textColor       The color of the character itself.
-     * @param backgroundColor The color drawn behind the character.
-     * @param description     The description of the tile, shown in the GUI on
-     *                        hovering over the tile.
+     * @param character
+     *            The character displayed on the screen.
+     * @param textColor
+     *            The color of the character itself.
+     * @param backgroundColor
+     *            The color drawn behind the character.
+     * @param description
+     *            The description of the tile, shown in the GUI on hovering over the
+     *            tile.
      */
     public TETile(char character, Color textColor, Color backgroundColor, String description) {
         this.character = character;
@@ -71,8 +81,10 @@ public class TETile {
     /**
      * Creates a copy of TETile t, except with given textColor.
      * 
-     * @param t         tile to copy
-     * @param textColor foreground color for tile copy
+     * @param t
+     *            tile to copy
+     * @param textColor
+     *            foreground color for tile copy
      */
     public TETile(TETile t, Color textColor) {
         this(t.character, textColor, t.backgroundColor, t.description, t.filepath);
@@ -87,8 +99,10 @@ public class TETile {
      * Note that the image provided must be of the right size (16x16). It will not
      * be automatically resized or truncated.
      * 
-     * @param x x coordinate
-     * @param y y coordinate
+     * @param x
+     *            x coordinate
+     * @param y
+     *            y coordinate
      */
     public void draw(double x, double y) {
         if (filepath != null) {
@@ -132,11 +146,16 @@ public class TETile {
      * new color will have a red value that is within dr of the current red value,
      * and likewise with dg and db.
      * 
-     * @param t  the tile to copy
-     * @param dr the maximum difference in red value
-     * @param dg the maximum difference in green value
-     * @param db the maximum difference in blue value
-     * @param r  the random number generator to use
+     * @param t
+     *            the tile to copy
+     * @param dr
+     *            the maximum difference in red value
+     * @param dg
+     *            the maximum difference in green value
+     * @param db
+     *            the maximum difference in blue value
+     * @param r
+     *            the random number generator to use
      */
     public static TETile colorVariant(TETile t, int dr, int dg, int db, Random r) {
         Color oldColor = t.textColor;
@@ -163,7 +182,8 @@ public class TETile {
      * rendering engine, this print method has to print in what might seem like
      * backwards order (so that the 0th row gets printed last).
      * 
-     * @param world the 2D world to print
+     * @param world
+     *            the 2D world to print
      * @return string representation of the world
      */
     public static String toString(TETile[][] world) {
@@ -174,7 +194,8 @@ public class TETile {
         for (int y = height - 1; y >= 0; y -= 1) {
             for (int x = 0; x < width; x += 1) {
                 if (world[x][y] == null) {
-                    throw new IllegalArgumentException("Tile at position x=" + x + ", y=" + y + " is null.");
+                    throw new IllegalArgumentException(
+                            "Tile at position x=" + x + ", y=" + y + " is null.");
                 }
                 sb.append(world[x][y].character());
             }
@@ -186,7 +207,8 @@ public class TETile {
     /**
      * Makes a copy of the given 2D tile array.
      * 
-     * @param tiles the 2D array to copy
+     * @param tiles
+     *            the 2D array to copy
      **/
     public static TETile[][] copyOf(TETile[][] tiles) {
         if (tiles == null) {

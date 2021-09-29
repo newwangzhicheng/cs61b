@@ -21,14 +21,14 @@ public class Hallway {
         Position corner = new Position(to.x, from.y);
 
         /** Scan from "from" to "corner" */
-        int stepX = (to.x == from.x) ? 0 : Math.abs(to.x - from.x) / (to.x - from.x);
+        int stepX = stepX();
         while (!p.equals(corner)) {
             pList.add(p);
             p = new Position(p.x + stepX, p.y);
         }
 
         /** Scan from "corner" to "to" */
-        int stepY = (to.y == from.y) ? 0 : Math.abs(to.y - from.y) / (to.y - from.y);
+        int stepY = stepY();
         while (!p.equals(to)) {
             pList.add(p);
             p = new Position(p.x, p.y + stepY);

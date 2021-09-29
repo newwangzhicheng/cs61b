@@ -13,5 +13,6 @@
     "f:\\iProject\\back\\cs61b\\library-sp18\\javalib\\junit-4.12.jar",
     "f:\\iProject\\back\\cs61b\\library-sp18\\javalib\\stdlib.jar",
     "f:\\iProject\\back\\cs61b\\library-sp18\\javalib\\stdlib-package.jar"
-  ]
+  ],
+  "java.format.settings.url": "eclipse-formatter.xml"
 }
