@@ -37,15 +37,6 @@ public class WorldGenerator {
         }
     }
 
-    /** init the world, fill with nothing */
-    public static void initialize(TETile[][] wd, int width, int height) {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                wd[i][j] = Tileset.NOTHING;
-            }
-        }
-    }
-
     /** Generate room try count times */
     public void generatRoom(int count, boolean canRoomBePlaced) {
         int w, h, x, y;
@@ -139,17 +130,17 @@ public class WorldGenerator {
     private void renderTile(int x, int y, int t) {
         type[x][y] = t;
         switch (t) {
-        case 0:
-            world[x][y] = Tileset.NOTHING;
-            break;
-        case 1:
-            world[x][y] = floor;
-            break;
-        case 2:
-            world[x][y] = wall;
-            break;
-        default:
-            break;
+            case 0:
+                world[x][y] = Tileset.NOTHING;
+                break;
+            case 1:
+                world[x][y] = floor;
+                break;
+            case 2:
+                world[x][y] = wall;
+                break;
+            default:
+                break;
         }
     }
 }
