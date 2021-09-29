@@ -51,7 +51,8 @@
       "name": "Launch MemoryGame",
       "request": "launch",
       "mainClass": "byog.lab6.MemoryGame",
-      "projectName": "proj2_70f625f9"
+      "projectName": "proj2_70f625f9",
+      "args": "234"
     },
     {
       "type": "java",
