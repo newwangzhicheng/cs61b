@@ -139,17 +139,17 @@ public class WorldGenerator {
     private void renderTile(int x, int y, int t) {
         type[x][y] = t;
         switch (t) {
-            case 0:
-                world[x][y] = Tileset.NOTHING;
-                break;
-            case 1:
-                world[x][y] = floor;
-                break;
-            case 2:
-                world[x][y] = wall;
-                break;
-            default:
-                break;
+        case 0:
+            world[x][y] = Tileset.NOTHING;
+            break;
+        case 1:
+            world[x][y] = floor;
+            break;
+        case 2:
+            world[x][y] = wall;
+            break;
+        default:
+            break;
         }
     }
 }
