@@ -59,7 +59,8 @@
       "name": "Launch MemoryGameSolution",
       "request": "launch",
       "mainClass": "byog.lab6.MemoryGameSolution",
-      "projectName": "proj2_70f625f9"
+      "projectName": "proj2_70f625f9",
+      "args": "35"
     }
   ]
 }

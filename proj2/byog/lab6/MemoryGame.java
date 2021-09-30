@@ -25,11 +25,11 @@ public class MemoryGame {
         }
 
         int seed = Integer.parseInt(args[0]);
-        MemoryGame game = new MemoryGame(40, 40);
+        MemoryGame game = new MemoryGame(40, 40, seed);
         game.startGame();
     }
 
-    public MemoryGame(int width, int height) {
+    public MemoryGame(int width, int height, long seed) {
         /*
          * Sets up StdDraw so that it has a width by height grid of 16 by 16 squares as
          * its canvas Also sets up the scale so the top left is (0,0) and the bottom
@@ -45,14 +45,13 @@ public class MemoryGame {
         StdDraw.clear(Color.BLACK);
         StdDraw.enableDoubleBuffering();
 
-        // TODO: Initialize random number generator
-        flashSequence("asdgf");
+        rand = new Random(seed);
     }
 
     public String generateRandomString(int n) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < n; i++) {
-            int index = rand.nextInt(26);
+            int index = rand.nextInt(CHARACTERS.length);
             sb.append(CHARACTERS[index]);
         }
         return sb.toString();
@@ -60,7 +59,20 @@ public class MemoryGame {
 
     public void drawFrame(String s) {
         StdDraw.clear(Color.BLACK);
-        Font font = new Font(null, Font.BOLD, 30);
+
+        /** Draw base text */
+        if (!gameOver) {
+            Font fontInfo = new Font("Monaco", Font.BOLD, 20);
+            StdDraw.setFont(fontInfo);
+            StdDraw.setPenColor(Color.WHITE);
+            StdDraw.textLeft(1, height - 2, "Round: " + round);
+            StdDraw.text(width / 2, height - 2, playerTurn ? "Type!" : "Watch!");
+            StdDraw.textRight(width - 1, height - 2, ENCOURAGEMENT[round % 3]);
+            StdDraw.line(0, height - 3, width, height - 3);
+        }
+
+        /** Draw game text */
+        Font font = new Font("Monaco", Font.BOLD, 30);
         StdDraw.setFont(font);
         StdDraw.setPenColor(Color.WHITE);
         StdDraw.text(width / 2, height / 2, s);
@@ -71,21 +83,46 @@ public class MemoryGame {
         for (String c : letters.split("")) {
             drawFrame(c);
             StdDraw.pause(1000);
-            StdDraw.clear(Color.BLACK);
+            drawFrame("");
             StdDraw.show();
             StdDraw.pause(500);
         }
     }
 
     public String solicitNCharsInput(int n) {
-        // TODO: Read n letters of player input
-        return null;
+        String input = "";
+        while (input.length() < n) {
+            if (StdDraw.hasNextKeyTyped()) {
+                input += StdDraw.nextKeyTyped();
+            }
+            drawFrame(input);
+        }
+        StdDraw.pause(500);
+        return input;
     }
 
     public void startGame() {
-        // TODO: Set any relevant variables before the game starts
+        round = 1;
+        gameOver = false;
+        playerTurn = false;
 
-        // TODO: Establish Game loop
+        while (!gameOver) {
+            drawFrame("Round: " + round);
+            StdDraw.pause(1500);
+            String roundStr = generateRandomString(round);
+            playerTurn = false;
+            flashSequence(roundStr);
+            playerTurn = true;
+            String input = solicitNCharsInput(round).toLowerCase();
+            if (!input.equals(roundStr)) {
+                gameOver = true;
+                drawFrame("Game Over! You made it to round: " + round);
+            } else {
+                drawFrame("Correct! Good job!");
+                StdDraw.pause(1500);
+            }
+            round++;
+        }
     }
 
 }
