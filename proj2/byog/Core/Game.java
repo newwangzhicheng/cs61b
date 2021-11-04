@@ -1,12 +1,12 @@
 package byog.Core;
 
-// import java.awt.Color;
-// import java.awt.Font;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.Random;
 import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
-// import edu.princeton.cs.introcs.StdDraw;
+import edu.princeton.cs.introcs.StdDraw;
 
 public class Game {
     TERenderer ter = new TERenderer();
@@ -19,7 +19,14 @@ public class Game {
      * menu.
      */
     public void playWithKeyboard() {
-        // drawStartGUI();
+        GameDrawer.init(WIDTH, HEIGHT);
+        GameDrawer.drawStartFrame("", false);
+        GameMode gameMode = new GameMode();
+        gameMode.selectMode();
+        String input = gameMode.execute();
+        TETile[][] finalWorldFrame = playWithInputString(input);
+        ter.initialize(WIDTH, HEIGHT);
+        ter.renderFrame(finalWorldFrame);
     }
 
     /**
@@ -45,7 +52,7 @@ public class Game {
 
         WorldGenerator wg = new WorldGenerator(WIDTH, HEIGHT, finalWorldFrame, Tileset.CUSTOM_FLOOR,
                 Tileset.CUSTOM_WALL, random);
-        wg.generatRoom(300, false);
+        wg.generatRoom(500, false);
         wg.connectRoom();
 
         // ter.initialize(WIDTH, HEIGHT);
@@ -66,31 +73,4 @@ public class Game {
         }
         return Long.parseLong(seedStr);
     }
-
-    // private void drawStartGUI() {
-    // initializeCanvas();
-
-    // Font font = new Font("Monaco", Font.PLAIN, 60);
-    // StdDraw.setFont(font);
-    // StdDraw.text(WIDTH / 2, HEIGHT * 3 / 4, "CS61B: The Game");
-
-    // font = new Font("Monaco", Font.PLAIN, 20);
-    // StdDraw.setFont(font);
-    // StdDraw.text(WIDTH / 2, HEIGHT / 4 + 2, "New Game (N)");
-    // StdDraw.text(WIDTH / 2, HEIGHT / 4, "Load Game (L)");
-    // StdDraw.text(WIDTH / 2, HEIGHT / 4 - 2, "Quit (Q)");
-
-    // StdDraw.show();
-    // }
-
-    // /** draw gui */
-    // private void initializeCanvas() {
-    // StdDraw.setCanvasSize(WIDTH * 16, HEIGHT * 16);
-    // StdDraw.setXscale(0, WIDTH);
-    // StdDraw.setYscale(0, HEIGHT);
-    // StdDraw.clear(Color.BLACK);
-    // StdDraw.enableDoubleBuffering();
-    // StdDraw.setPenColor(Color.WHITE);
-
-    // }
 }

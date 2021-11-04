@@ -12,17 +12,17 @@
     },
     {
       "type": "java",
-      "name": "Launch Main",
+      "name": "start with args",
       "request": "launch",
       "mainClass": "byog.Core.Main",
       "projectName": "proj2_70f625f9",
-      "args": "N9457866L"
+      "args": "N34523L"
     },
     {
       "type": "java",
-      "name": "Launch Main(1)",
+      "name": "start without args",
       "request": "launch",
-      "mainClass": "byog.SaveDemo.Main",
+      "mainClass": "byog.Core.Main",
       "projectName": "proj2_70f625f9"
     },
     {
@@ -52,15 +52,14 @@
       "request": "launch",
       "mainClass": "byog.lab6.MemoryGame",
       "projectName": "proj2_70f625f9",
-      "args": "234"
+      "args": "43534"
     },
     {
       "type": "java",
       "name": "Launch MemoryGameSolution",
       "request": "launch",
       "mainClass": "byog.lab6.MemoryGameSolution",
-      "projectName": "proj2_70f625f9",
-      "args": "35"
+      "projectName": "proj2_70f625f9"
     }
   ]
 }
