@@ -1,15 +1,16 @@
 package hw2;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-import java.lang.IllegalArgumentException;
-import java.lang.IndexOutOfBoundsException;
 
 public class Percolation {
     private int n;
+    private int top;
+    private int bottom;
     private int openCount;
     /** 0 represents full, 1 represents open */
     private int[][] sites;
     private WeightedQuickUnionUF uf;
+    private WeightedQuickUnionUF ufWithoutBottom;
 
     /** create N-by-N grid, with all sites initially blocked */
     public Percolation(int n) {
@@ -17,9 +18,14 @@ public class Percolation {
             throw new IllegalArgumentException("n must > 0");
         }
         this.n = n;
+        top = n * n;
+        bottom = top + 1;
         openCount = 0;
         sites = new int[n][n];
-        uf = new WeightedQuickUnionUF(n * n);
+        /** n^2 th is top virtual node, n^ + 1 th is bottom virtual node */
+        uf = new WeightedQuickUnionUF(n * n + 2);
+        ufWithoutBottom = new WeightedQuickUnionUF(n * n + 1);
+
     }
 
     /** open the site (row, col) if it is not open already */
@@ -33,6 +39,16 @@ public class Percolation {
         }
         sites[row][col] = 1;
         openCount += 1;
+        /** connect first row node to top virtual node */
+        /** connect last row node to bottom virtual node */
+        int i = getI(row, col);
+        if (row == 0) {
+            uf.union(top, i);
+            ufWithoutBottom.union(top, i);
+        }
+        if (row == n - 1) {
+            uf.union(bottom, i);
+        }
 
         /** connect left, top, right, bottom if exists */
         connect(row, col, row - 1, col);
@@ -54,7 +70,8 @@ public class Percolation {
         if (row < 0 || col > n - 1) {
             throw new IndexOutOfBoundsException();
         }
-        return sites[row][col] == 0;
+        int i = getI(row, col);
+        return ufWithoutBottom.connected(top, i);
     }
 
     /** number of open sites */
@@ -64,44 +81,19 @@ public class Percolation {
 
     /** does the system percolate? */
     public boolean percolates() {
-        /** check all opened bottom site, bottom sites are [n^2-n, n^2-1] */
-        for (int i = n * n - n; i < n * n; i++) {
-            int bottomRow = getRow(i);
-            int bottomCol = getCol(i);
-            if (isOpen(bottomRow, bottomCol)) {
-                for (int j = 0; j < n; j++) {
-                    int topRow = getRow(j);
-                    int topCol = getCol(j);
-                    if (isOpen(topRow, topCol)) {
-                        if (uf.connected(i, j)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
+        return uf.connected(top, bottom);
     }
 
     /** connect two sets */
     private void connect(int rowA, int colA, int rowB, int colB) {
-        if (rowB < 0 || rowB > n - 1 || colB < 0 || colB > n - 1 || isFull(rowB, colB)) {
+        if (rowB < 0 || rowB > n - 1 || colB < 0 || colB > n - 1 || !isOpen(rowB, colB)) {
             return;
         }
         int ithA = getI(rowA, colA);
         int ithB = getI(rowB, colB);
         uf.union(ithA, ithB);
+        ufWithoutBottom.union(ithA, ithB);
 
-    }
-
-    /** get row from uf[i] */
-    private int getRow(int i) {
-        return i / n;
-    }
-
-    /** get col from uf[i] */
-    private int getCol(int i) {
-        return i % n;
     }
 
     /** get i from site[row][col] */
@@ -111,9 +103,13 @@ public class Percolation {
 
     /** for test */
     public static void main(String[] args) {
-        Percolation pc = new Percolation(2);
+        Percolation pc = new Percolation(3);
+        System.out.println(pc.isFull(0, 0));
         pc.open(0, 0);
-        pc.open(1, 1);
+        pc.open(1, 0);
+        pc.open(2, 0);
+        pc.open(2, 2);
+        System.out.println(pc.isFull(2, 2));
         System.out.println(pc.percolates());
     }
 }

@@ -30,7 +30,7 @@
       "request": "launch",
       "mainClass": "hw2.PercolationVisualizer",
       "projectName": "hw2_40d98387",
-      "args": "inputFiles/snake101.txt"
+      "args": "inputFiles/sedgewick60.txt"
     }
   ]
 }
