@@ -11,7 +11,7 @@ public class PercolationStats {
     /** perform T independent experiments on an N-by-N grid */
     public PercolationStats(int N, int T, PercolationFactory pf) {
         if (N <= 0 || T <= 0) {
-            throw new IndexOutOfBoundsException();
+            throw new IllegalArgumentException();
         }
         count = new int[T];
         this.N = N;
@@ -46,12 +46,12 @@ public class PercolationStats {
 
     /** low endpoint of 95% confidence interval */
     public double confidenceLow() {
-        return mean() - 1.96 * Math.sqrt(stddev()) / Math.sqrt(T);
+        return mean() - (1.96 * stddev() / Math.sqrt(T));
     }
 
     /** high endpoint of 95% confidence interval */
     public double confidenceHigh() {
-        return mean() + 1.96 * Math.sqrt(stddev()) / Math.sqrt(T);
+        return mean() + (1.96 * stddev() / Math.sqrt(T));
     }
 
     public static void main(String[] args) {

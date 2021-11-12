@@ -102,14 +102,14 @@ public class Percolation {
     }
 
     /** for test */
-    public static void main(String[] args) {
-        Percolation pc = new Percolation(3);
-        System.out.println(pc.isFull(0, 0));
-        pc.open(0, 0);
-        pc.open(1, 0);
-        pc.open(2, 0);
-        pc.open(2, 2);
-        System.out.println(pc.isFull(2, 2));
-        System.out.println(pc.percolates());
-    }
+    // public static void main(String[] args) {
+    // Percolation pc = new Percolation(3);
+    // System.out.println(pc.isFull(0, 0));
+    // pc.open(0, 0);
+    // pc.open(1, 0);
+    // pc.open(2, 0);
+    // pc.open(2, 2);
+    // System.out.println(pc.isFull(2, 2));
+    // System.out.println(pc.percolates());
+    // }
 }
