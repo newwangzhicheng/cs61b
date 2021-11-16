@@ -24,14 +24,20 @@ public class SimpleOomage implements Oomage {
         return this.red == so.red && this.green == so.green && this.blue == so.blue;
     }
 
-    /*
+    /**
      * Uncomment this method after you've written equals and failed the
      * testHashCodeAndEqualsConsistency test.
-     * 
-     * @Override public int hashCode() { if (!USE_PERFECT_HASH) { return red + green
-     * + blue; } else { // TODO: Write a perfect hash function for Simple Oomages.
-     * return 0; } }
      */
+
+    // @Override
+    // public int hashCode() {
+    // if (!USE_PERFECT_HASH) {
+    // return red + green + blue;
+    // } else {
+    // // TODO: Write a perfect hash function for Simple Oomages.
+    // return red + green + blue;
+    // }
+    // }
 
     public SimpleOomage(int r, int g, int b) {
         if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
