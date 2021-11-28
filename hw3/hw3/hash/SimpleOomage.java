@@ -10,10 +10,13 @@ public class SimpleOomage implements Oomage {
     protected int blue;
 
     private static final double WIDTH = 0.01;
-    private static final boolean USE_PERFECT_HASH = false;
+    private static final boolean USE_PERFECT_HASH = true;
 
     @Override
     public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
         if (o == null) {
             return false;
         }
@@ -29,15 +32,15 @@ public class SimpleOomage implements Oomage {
      * testHashCodeAndEqualsConsistency test.
      */
 
-    // @Override
-    // public int hashCode() {
-    // if (!USE_PERFECT_HASH) {
-    // return red + green + blue;
-    // } else {
-    // // TODO: Write a perfect hash function for Simple Oomages.
-    // return red + green + blue;
-    // }
-    // }
+    @Override
+    public int hashCode() {
+        if (!USE_PERFECT_HASH) {
+            return red + green + blue;
+        } else {
+            // TODO: Write a perfect hash function for Simple Oomages.
+            return red * 52 * 52+ green * 52 + blue;
+        }
+    }
 
     public SimpleOomage(int r, int g, int b) {
         if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {

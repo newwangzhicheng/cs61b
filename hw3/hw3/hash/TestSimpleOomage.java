@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
@@ -34,11 +33,10 @@ public class TestSimpleOomage {
         SimpleOomage ooB = new SimpleOomage(10, 5, 15);
         SimpleOomage ooC = new SimpleOomage(55, 10, 15);
 
-        HashSet<SimpleOomage> hashSet = new HashSet<>();
-        hashSet.add(ooA1);
-        assertTrue(hashSet.contains(ooA2));
-        assertFalse(hashSet.contains(ooB));
-        assertFalse(hashSet.contains(ooC));
+        assertTrue(ooA1.hashCode() == ooA2.hashCode());
+        assertFalse(ooA1.hashCode() == ooB.hashCode());
+        assertFalse(ooA1.hashCode() == ooC.hashCode());
+
     }
 
     @Test
@@ -65,15 +63,18 @@ public class TestSimpleOomage {
      * TODO: Uncomment this test after you finish haveNiceHashCode Spread in
      * OomageTestUtility
      */
-    /*
-     * @Test public void testRandomOomagesHashCodeSpread() { List<Oomage> oomages =
-     * new ArrayList<>(); int N = 10000;
-     * 
-     * for (int i = 0; i < N; i += 1) {
-     * oomages.add(SimpleOomage.randomSimpleOomage()); }
-     * 
-     * assertTrue(OomageTestUtility.haveNiceHashCodeSpread(oomages, 10)); }
-     */
+
+    @Test
+    public void testRandomOomagesHashCodeSpread() {
+        List<Oomage> oomages = new ArrayList<>();
+        int N = 10000;
+
+        for (int i = 0; i < N; i += 1) {
+            oomages.add(SimpleOomage.randomSimpleOomage());
+        }
+
+        assertTrue(OomageTestUtility.haveNiceHashCodeSpread(oomages, 10));
+    }
 
     /** Calls tests for SimpleOomage. */
     public static void main(String[] args) {
