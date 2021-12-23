@@ -181,7 +181,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         swap(1, size);
         contents[size] = null;
         size--;
-        sink(1);
+        if (size != 0) {
+            sink(1);
+        }
         return item;
     }
 
@@ -208,14 +210,16 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         for (int i = 1; i <= size; i++) {
             if (item.equals(getNode(i).item())) {
                 changeIndex = i;
+                break;
             }
         }
         if (changeIndex > 0) {
+            double oldPriority = getNode(changeIndex).myPriority;
             getNode(changeIndex).myPriority = priority;
-            if (min(changeIndex, min(leftIndex(changeIndex), rightIndex(changeIndex))) == changeIndex) {
+            if (priority > oldPriority) {
                 sink(changeIndex);
             }
-            if (min(changeIndex, parentIndex(changeIndex)) == parentIndex(changeIndex)) {
+            if (priority < oldPriority) {
                 swim(changeIndex);
             }
         }
@@ -446,6 +450,68 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             assertEquals(expected[i], pq.removeMin());
             i += 1;
         }
+    }
+
+    @Test
+    public void testRemoveMin() {
+        ArrayHeap<String> pq = new ArrayHeap<>();
+        pq.insert("x1", 1);
+        pq.removeMin();
+        assertTrue(pq.size() == 0);
+    }
+
+    @Test
+    public void testDecreaseProority() {
+        ArrayHeap<String> pq = new ArrayHeap<>();
+        pq.size = 7;
+        for (int i = 1; i <= 7; i += 1) {
+            pq.contents[i] = pq.new Node("x" + i, i);
+        }
+        // Change item x6's priority to a low value.
+
+        pq.changePriority("x6", 0);
+        System.out.println("PQ before swimming:");
+        System.out.println(pq);
+
+        // Swim x6 upwards. It should reach the root.
+
+        pq.swim(6);
+        System.out.println("PQ after swimming:");
+        System.out.println(pq);
+        assertEquals("x6", pq.contents[1].myItem);
+        assertEquals("x2", pq.contents[2].myItem);
+        assertEquals("x1", pq.contents[3].myItem);
+        assertEquals("x4", pq.contents[4].myItem);
+        assertEquals("x5", pq.contents[5].myItem);
+        assertEquals("x3", pq.contents[6].myItem);
+        assertEquals("x7", pq.contents[7].myItem);
+    }
+
+    @Test
+    public void testIncreaseProority() {
+        ArrayHeap<String> pq = new ArrayHeap<>();
+        pq.size = 7;
+        for (int i = 1; i <= 7; i += 1) {
+            pq.contents[i] = pq.new Node("x" + i, i);
+        }
+        // Change item x6's priority to a low value.
+
+        pq.changePriority("x3", 11);
+        System.out.println("PQ before swimming:");
+        System.out.println(pq);
+
+        // Swim x6 upwards. It should reach the root.
+
+        pq.swim(6);
+        System.out.println("PQ after swimming:");
+        System.out.println(pq);
+        assertEquals("x1", pq.contents[1].myItem);
+        assertEquals("x2", pq.contents[2].myItem);
+        assertEquals("x6", pq.contents[3].myItem);
+        assertEquals("x4", pq.contents[4].myItem);
+        assertEquals("x5", pq.contents[5].myItem);
+        assertEquals("x3", pq.contents[6].myItem);
+        assertEquals("x7", pq.contents[7].myItem);
     }
 
 }
