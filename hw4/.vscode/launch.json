@@ -1,0 +1,36 @@
+{
+  // 使用 IntelliSense 了解相关属性。
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "Launch CommonBugDetector",
+      "request": "launch",
+      "mainClass": "hw4.puzzle.CommonBugDetector",
+      "projectName": "hw4_40d98389"
+    },
+    {
+      "type": "java",
+      "name": "Launch EightPuzzleSolver",
+      "request": "launch",
+      "mainClass": "hw4.puzzle.EightPuzzleSolver",
+      "projectName": "hw4_40d98389",
+      "args": "F:\\iProject\\back\\cs61b\\hw4\\input\\puzzle02.txt"
+    },
+    {
+      "type": "java",
+      "name": "Launch WordPuzzleSolver",
+      "request": "launch",
+      "mainClass": "hw4.puzzle.WordPuzzleSolver",
+      "projectName": "hw4_40d98389"
+    }
+  ]
+}
