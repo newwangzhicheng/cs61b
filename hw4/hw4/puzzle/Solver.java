@@ -40,7 +40,7 @@ public class Solver {
                 break;
             }
             for (WorldState e : out.worldState.neighbors()) {
-                if (!e.equals(out.worldState)) {
+                if (out.previous == null || !e.equals(out.previous.worldState)) {
                     SearchNode node = new SearchNode(e, out.moves + 1, out);
                     pq.insert(node);
                 }

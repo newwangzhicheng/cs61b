@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch AlphabetEasyPuzzleSolver",
+      "request": "launch",
+      "mainClass": "hw4.puzzle.AlphabetEasyPuzzleSolver",
+      "projectName": "hw4_40d98389"
+    },
+    {
+      "type": "java",
       "name": "Launch Current File",
       "request": "launch",
       "mainClass": "${file}"
@@ -23,7 +30,7 @@
       "request": "launch",
       "mainClass": "hw4.puzzle.EightPuzzleSolver",
       "projectName": "hw4_40d98389",
-      "args": "F:\\iProject\\back\\cs61b\\hw4\\input\\puzzle02.txt"
+      "args": "F:\\iProject\\back\\cs61b\\hw4\\input\\puzzle2x2-05.txt"
     },
     {
       "type": "java",

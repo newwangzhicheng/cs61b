@@ -5,14 +5,15 @@ import java.util.List;
 
 public class Board implements WorldState {
 
+    private final static int BLANK = 0;
     private int[][] tiles;
 
-    public Board(int[][] tiles) {
-        int size = tiles[0].length;
-        this.tiles = new int[size][size];
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                this.tiles[i][j] = tiles[i][j];
+    public Board(int[][] t) {
+        int N = t.length;
+        this.tiles = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                this.tiles[i][j] = t[i][j];
             }
         }
     }
@@ -25,7 +26,7 @@ public class Board implements WorldState {
     }
 
     public int size() {
-        return tiles[0].length;
+        return tiles.length;
     }
 
     @Override
@@ -34,7 +35,7 @@ public class Board implements WorldState {
         int i = 0, j = 0;
         for (int x = 0; x < size(); x++) {
             for (int y = 0; y < size(); y++) {
-                if (tileAt(x, y) == 0) {
+                if (tileAt(x, y) == BLANK) {
                     i = x;
                     j = y;
                     break;
@@ -70,7 +71,8 @@ public class Board implements WorldState {
         int distance = 0;
         for (int i = 0; i < size(); i++) {
             for (int j = 0; j < size(); j++) {
-                if (tileAt(i, j) != correctAt(i, j)) {
+                int tileValue = tiles[i][j];
+                if (tileValue != BLANK && tileValue != correctAt(i, j)) {
                     distance += 1;
                 }
             }
@@ -82,7 +84,10 @@ public class Board implements WorldState {
         int distance = 0;
         for (int i = 0; i < size(); i++) {
             for (int j = 0; j < size(); j++) {
-                int tileValue = tileAt(i, j);
+                int tileValue = tiles[i][j];
+                if (tileValue == BLANK) {
+                    continue;
+                }
                 int correctX = correctToX(tileValue);
                 int correctY = correctToY(tileValue);
                 distance += Math.abs(i - correctX) + Math.abs(j - correctY);
@@ -151,6 +156,9 @@ public class Board implements WorldState {
     }
 
     private int correctAt(int i, int j) {
+        if (i == size() - 1 && j == size() - 1) {
+            return 0;
+        }
         return i * size() + j + 1;
     }
 

@@ -1,4 +1,5 @@
 package hw4.puzzle;
+
 import edu.princeton.cs.algs4.StdOut;
 
 public class AlphabetEasyPuzzleSolver {
@@ -6,8 +7,8 @@ public class AlphabetEasyPuzzleSolver {
      * Test routine for your Solver class. Uncomment and run to test
      * your basic functionality.
      **********************************************************************/
-    /*public static void main(String[] args) {
-        char start = 'w';
+    public static void main(String[] args) {
+        char start = 'g';
 
         AlphabetEasyPuzzle startState = new AlphabetEasyPuzzle(start);
         Solver solver = new Solver(startState);
@@ -16,5 +17,5 @@ public class AlphabetEasyPuzzleSolver {
         for (WorldState ws : solver.solution()) {
             StdOut.println(ws);
         }
-    }*/
+    }
 }
