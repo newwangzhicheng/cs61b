@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Board implements WorldState {
 
-    private final static int BLANK = 0;
+    private final int BLANK = 0;
     private int[][] tiles;
 
     public Board(int[][] t) {
@@ -20,7 +20,8 @@ public class Board implements WorldState {
 
     public int tileAt(int i, int j) throws IndexOutOfBoundsException {
         if (i < 0 || i >= size() || j < 0 || j >= size()) {
-            throw new IndexOutOfBoundsException("i or j should greater than or equals to 0 and less than N");
+            throw new IndexOutOfBoundsException("i or j should greater than or "
+                    + "equals to 0 and less than N");
         }
         return tiles[i][j];
     }
@@ -113,6 +114,9 @@ public class Board implements WorldState {
             return false;
         }
         Board w = (Board) y;
+        if (w.size() != size()) {
+            return false;
+        }
         for (int i = 0; i < size(); i++) {
             for (int j = 0; j < size(); j++) {
                 if (w.tileAt(i, j) != tileAt(i, j)) {
@@ -121,6 +125,11 @@ public class Board implements WorldState {
             }
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return tiles.hashCode();
     }
 
     /**

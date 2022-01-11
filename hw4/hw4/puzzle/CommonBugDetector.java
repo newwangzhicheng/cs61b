@@ -89,8 +89,6 @@ public class CommonBugDetector {
         Solver s3 = new Solver(aep);
 
         System.out.println(s3.moves());
-        // System.out.println("TODO: Print out the number of total things ever"
-        // + " enqueued in your MinPQ and compare to the comments.");
         // if you print out the total number of items enqueued by s3
         // it should be approximately 25, not approximately 50.
     }
