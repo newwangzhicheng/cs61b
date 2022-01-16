@@ -35,7 +35,13 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Queue<Item>>
             makeSingleItemQueues(Queue<Item> items) {
         // Your code here!
-        return null;
+        Queue<Queue<Item>> queues = new Queue<>();
+        while(!items.isEmpty()) {
+            Queue<Item> singleQueue = new Queue<>();
+            singleQueue.enqueue(items.dequeue());
+            queues.enqueue(singleQueue);
+        }
+        return queues;
     }
 
     /**
@@ -54,13 +60,47 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Item> mergeSortedQueues(
             Queue<Item> q1, Queue<Item> q2) {
         // Your code here!
-        return null;
+        Queue<Item> sortedQueue = new Queue<>();
+        while(!q1.isEmpty() || !q2.isEmpty()) {
+            sortedQueue.enqueue(getMin(q1, q2));
+        }
+        return sortedQueue;
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
         // Your code here!
-        return items;
+        if (items.size() == 1) {
+            return items;
+        }
+        Queue<Item> left = new Queue<>();
+        Queue<Item> right = new Queue<>();
+        int size = items.size();
+        int i = 0;
+        while(!items.isEmpty()) {
+            if (i < size / 2) {
+                left.enqueue(items.dequeue());
+            } else {
+                right.enqueue(items.dequeue());
+            }
+            i++;
+        }
+        Queue<Item> sortedLeft = mergeSort(left);
+        Queue<Item> sortedRight = mergeSort(right);
+        Queue<Item> sorted = mergeSortedQueues(sortedLeft, sortedRight);
+        return sorted;
+    }
+
+    public static void main(String[] args) {
+        Queue<String> q = new Queue<>();
+        q.enqueue("Alice");
+        q.enqueue("Ethan");
+        q.enqueue("Vanessa");
+
+        Queue<String> sorted = MergeSort.mergeSort(q);
+        while(!sorted.isEmpty()) {
+            System.out.println(sorted.dequeue());
+        }
     }
 }
