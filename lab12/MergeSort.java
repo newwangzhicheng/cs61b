@@ -76,7 +76,7 @@ public class MergeSort {
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
         // Your code here!
-        if (items.size() == 1) {
+        if (items.size() <= 1) {
             return items;
         }
         Queue<Item> left = new Queue<>();
@@ -98,15 +98,30 @@ public class MergeSort {
     }
 
     public static void main(String[] args) {
-        Queue<String> q = new Queue<>();
-        q.enqueue("a");
-        q.enqueue("c");
-        q.enqueue("d");
-        q.enqueue("b");
+        Queue<String> students = new Queue<>();
+        students.enqueue("Alice");
+        students.enqueue("Vanessa");
+        students.enqueue("Ethan");
+        students.enqueue("David");
+        students.enqueue("Jay");
+        students.enqueue("Harry");
+        System.out.println("original queue: " + students);
+        Queue<String> students2 = MergeSort.mergeSort(students);
+        System.out.println("sorted queue: " + students2);
+        System.out.println(students.size() == students2.size());
 
-        Queue<String> sorted = MergeSort.mergeSort(q);
-        while (!sorted.isEmpty()) {
-            System.out.println(sorted.dequeue());
-        }
+        Queue<Integer> ints = new Queue<>();
+        ints.enqueue(10);
+        ints.enqueue(5);
+        ints.enqueue(6);
+        ints.enqueue(4);
+        ints.enqueue(1);
+        ints.enqueue(7);
+        ints.enqueue(9);
+        ints.enqueue(3);
+        System.out.println("original queue: " + ints);
+        Queue<Integer> ints2 = MergeSort.mergeSort(ints);
+        System.out.println("sorted queue: " + ints2);
+        System.out.println(ints.size() == ints2.size());
     }
 }

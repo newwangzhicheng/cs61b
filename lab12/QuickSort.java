@@ -82,22 +82,43 @@ public class QuickSort {
         partition(items, pivot, less, equal, greater);
         less = quickSort(less);
         greater = quickSort(greater);
-        Queue<Item> sorted = catenate(less, equal);
-        sorted = catenate(sorted, greater);
-        return sorted;
+        while (!less.isEmpty()) {
+            items.enqueue(less.dequeue());
+        }
+        while (!equal.isEmpty()) {
+            items.enqueue(equal.dequeue());
+        }
+        while (!greater.isEmpty()) {
+            items.enqueue(greater.dequeue());
+        }
+        return items;
     }
 
     public static void main(String[] args) {
-        Queue<String> q = new Queue<>();
-        q.enqueue("d");
-        q.enqueue("a");
-        q.enqueue("c");
-        q.enqueue("b");
+        Queue<String> students = new Queue<>();
+        students.enqueue("Alice");
+        students.enqueue("Vanessa");
+        students.enqueue("Ethan");
+        students.enqueue("David");
+        students.enqueue("Jay");
+        students.enqueue("Harry");
+        System.out.println("original queue: " + students);
+        Queue<String> students2 = QuickSort.quickSort(students);
+        System.out.println("sorted queue: " + students2);
+        System.out.println(students.size() == students2.size());
 
-        Queue<String> sorted = QuickSort.quickSort(q);
-        while (!sorted.isEmpty()) {
-            System.out.println(sorted.dequeue());
-        }
-
+        Queue<Integer> ints = new Queue<>();
+        ints.enqueue(10);
+        ints.enqueue(5);
+        ints.enqueue(6);
+        ints.enqueue(4);
+        ints.enqueue(1);
+        ints.enqueue(7);
+        ints.enqueue(9);
+        ints.enqueue(3);
+        System.out.println("original queue: " + ints);
+        Queue<Integer> ints2 = QuickSort.quickSort(ints);
+        System.out.println("sorted queue: " + ints2);
+        System.out.println(ints.size() == ints2.size());
     }
 }
