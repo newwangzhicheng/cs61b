@@ -94,7 +94,10 @@ public class MergeSort {
         Queue<Item> sortedLeft = mergeSort(left);
         Queue<Item> sortedRight = mergeSort(right);
         Queue<Item> sorted = mergeSortedQueues(sortedLeft, sortedRight);
-        return sorted;
+        while (!sorted.isEmpty()) {
+            items.enqueue(sorted.dequeue());
+        }
+        return items;
     }
 
     public static void main(String[] args) {
