@@ -56,12 +56,14 @@ public class RadixSort {
         String[] result = new String[asciis.length];
         for (int i = 0; i < asciis.length; i++) {
             String item = asciis[i];
-            int c = stringAtIndexToInt(asciis[i], index);
+            int c = stringAtIndexToInt(item, index);
             int place = starts[c];
             result[place] = item;
             starts[c] += 1;
         }
-        System.arraycopy(result, 0, asciis, 0, result.length);
+        for (int i = 0; i < asciis.length; i++) {
+            asciis[i] = result[i];
+        }
 
         return;
     }
@@ -70,7 +72,7 @@ public class RadixSort {
         if (item.length() <= index) {
             return 0;
         }
-        return (int) item.charAt(index) + 1;
+        return item.charAt(index) + 1;
     }
 
     /**
@@ -92,9 +94,8 @@ public class RadixSort {
     }
 
     public static void main(String[] args) {
-        String[] strings = {
-                "42a", "2a", "42b", ":", "4c"
-        };
+        String[] strings = { "56", "112", "94", "4", "9", "82", "394", "80" };
+
         String[] sorted = sort(strings);
         for (String s : sorted) {
             System.out.println(s);
