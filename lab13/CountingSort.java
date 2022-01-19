@@ -1,3 +1,6 @@
+import java.util.Map;
+import java.util.LinkedHashMap;
+
 /**
  * Class with 2 ways of doing Counting sort, one naive way and one "better" way
  *
@@ -54,7 +57,7 @@ public class CountingSort {
         }
 
         // return the sorted array
-        return sorted;
+        return sorted2;
     }
 
     /**
@@ -66,7 +69,36 @@ public class CountingSort {
      * @param arr int array that will be sorted
      */
     public static int[] betterCountingSort(int[] arr) {
-        // TODO make counting sort work with arrays containing negative numbers.
-        return null;
+        // find max and min
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        for (int i : arr) {
+            max = i > max ? i : max;
+            min = i < min ? i : min;
+        }
+        int range = max - min;
+
+        // gather counts for each value, offset min
+        int[] counts = new int[range + 1];
+        for (int i : arr) {
+            int value = i - min;
+            counts[value]++;
+        }
+
+        // use start position calculation
+        int[] starts = new int[range + 1];
+        int pos = 0;
+        for (int i = 0; i < starts.length; i++) {
+            starts[i] = pos;
+            pos += counts[i];
+        }
+        int[] sorted = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            int item = arr[i] - min;
+            int place = starts[item];
+            sorted[place] = arr[i];
+            starts[item] += 1;
+        }
+        return sorted;
     }
 }
