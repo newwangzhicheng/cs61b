@@ -26,7 +26,7 @@ public class RadixSort {
             result[i] = asciis[i];
         }
         for (int i = 0; i < maxWitdh; i++) {
-            sortHelperLSD(result, i);
+            result = sortHelperLSD(result, i);
         }
         return result;
     }
@@ -38,7 +38,7 @@ public class RadixSort {
      * @param asciis Input array of Strings
      * @param index  The position to sort the Strings on.
      */
-    private static void sortHelperLSD(String[] asciis, int index) {
+    private static String[] sortHelperLSD(String[] asciis, int index) {
         // Optional LSD helper method for required LSD radix sort
         int[] counts = new int[BOX_LENGTH];
         for (int i = 0; i < asciis.length; i++) {
@@ -61,11 +61,8 @@ public class RadixSort {
             result[place] = item;
             starts[c] += 1;
         }
-        for (int i = 0; i < asciis.length; i++) {
-            asciis[i] = result[i];
-        }
 
-        return;
+        return result;
     }
 
     private static int stringAtIndexToInt(String item, int index) {
