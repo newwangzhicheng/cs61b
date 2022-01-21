@@ -26,7 +26,7 @@ public class RadixSort {
             result[i] = asciis[i];
         }
         for (int i = 0; i < maxWitdh; i++) {
-            result = sortHelperLSD(result, i);
+            sortHelperLSD(result, i);
         }
         return result;
     }
@@ -38,38 +38,77 @@ public class RadixSort {
      * @param asciis Input array of Strings
      * @param index  The position to sort the Strings on.
      */
-    private static String[] sortHelperLSD(String[] asciis, int index) {
+    // private static void sortHelperLSD(String[] asciis, int index) {
+    // // Optional LSD helper method for required LSD radix sort
+    // int[] counts = new int[BOX_LENGTH];
+    // for (int i = 0; i < asciis.length; i++) {
+    // int c = stringAtIndexToInt(asciis[i], index);
+    // counts[c]++;
+    // }
+
+    // int[] starts = new int[BOX_LENGTH];
+    // int pos = 0;
+    // for (int i = 0; i < BOX_LENGTH; i++) {
+    // starts[i] = pos;
+    // pos += counts[i];
+    // }
+
+    // String[] result = new String[asciis.length];
+    // for (int i = 0; i < asciis.length; i++) {
+    // String item = asciis[i];
+    // int c = stringAtIndexToInt(item, index);
+    // int place = starts[c];
+    // result[place] = item;
+    // starts[c] += 1;
+    // }
+
+    // for (int i = 0; i < asciis.length; i++) {
+    // asciis[i] = result[i];
+    // }
+    // }
+
+    // private static int stringAtIndexToInt(String item, int index) {
+    // if (item.length() <= index) {
+    // return 0;
+    // }
+    // return item.charAt(index) + 1;
+    // }
+    private static void sortHelperLSD(String[] asciis, int index) {
         // Optional LSD helper method for required LSD radix sort
-        int[] counts = new int[BOX_LENGTH];
-        for (int i = 0; i < asciis.length; i++) {
-            int c = stringAtIndexToInt(asciis[i], index);
+        int R = 256;
+        int[] counts = new int[R + 1];
+        for (String item : asciis) {
+            int c = charAtOrMinChar(index, item);
             counts[c]++;
         }
 
-        int[] starts = new int[BOX_LENGTH];
+        int[] starts = new int[R + 1];
         int pos = 0;
-        for (int i = 0; i < BOX_LENGTH; i++) {
+        for (int i = 0; i < R + 1; i++) {
             starts[i] = pos;
             pos += counts[i];
         }
 
-        String[] result = new String[asciis.length];
+        String[] sorted = new String[asciis.length];
         for (int i = 0; i < asciis.length; i++) {
             String item = asciis[i];
-            int c = stringAtIndexToInt(item, index);
+            int c = charAtOrMinChar(index, item);
             int place = starts[c];
-            result[place] = item;
-            starts[c] += 1;
+            sorted[place] = item;
+            starts[c]++;
         }
 
-        return result;
+        for (int i = 0; i < asciis.length; i++) {
+            asciis[i] = sorted[i];
+        }
     }
 
-    private static int stringAtIndexToInt(String item, int index) {
-        if (item.length() <= index) {
+    private static int charAtOrMinChar(int index, String item) {
+        if (index < item.length() && index >= 0) {
+            return item.charAt(index) + 1;
+        } else {
             return 0;
         }
-        return item.charAt(index) + 1;
     }
 
     /**
@@ -91,7 +130,7 @@ public class RadixSort {
     }
 
     public static void main(String[] args) {
-        String[] strings = { "56", "112", "94", "4", "9", "82", "394", "80" };
+        String[] strings = { "µ", "s", ">", "3", "Ì", "", "", "\"", "·", "¹", "S" };
 
         String[] sorted = sort(strings);
         for (String s : sorted) {
